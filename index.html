@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klinika Medyczna - Profesjonalne Usługi Zdrowotne</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #4A90A4;
+            --secondary-blue: #5DADE2;
+            --dark-grey: #2C3E50;
+            --light-grey: #BDC3C7;
+            --bg-grey: #ECF0F1;
+            --white: #FFFFFF;
+            --text-dark: #34495E;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-grey);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-grey) 100%);
+            color: var(--white);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .lang-switcher {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .lang-switcher:hover {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        .flag-icon {
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-placeholder {
+            width: 80px;
+            height: 80px;
+            background-color: var(--white);
+            border: 3px solid var(--secondary-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+            font-weight: bold;
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: scale(1.05);
+        }
+
+        .clinic-name h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .clinic-name p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--secondary-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(74, 144, 164, 0.9) 0%, rgba(44, 62, 80, 0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%234A90A4" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 5rem 2rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Doctors Section */
+        .doctors-section {
+            padding: 4rem 2rem;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--dark-grey);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-blue), var(--secondary-blue));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .doctor-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, var(--bg-grey) 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(74, 144, 164, 0.3);
+        }
+
+        .doctor-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .doctor-image-placeholder {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-align: center;
+            flex-shrink: 0;
+            border: 5px solid var(--white);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .doctor-info {
+            flex: 1;
+        }
+
+        .doctor-info h3 {
+            font-size: 1.8rem;
+            color: var(--dark-grey);
+            margin-bottom: 0.5rem;
+        }
+
+        .specialization {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info {
+            background-color: var(--white);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border-left: 4px solid var(--primary-blue);
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            color: var(--dark-grey);
+        }
+
+        .phone-icon::before {
+            content: '📞';
+            font-size: 1.2rem;
+        }
+
+        .bio {
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background-color: var(--white);
+            border-radius: 8px;
+        }
+
+        .bio h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Price Lists */
+        .pricelist {
+            margin-top: 2rem;
+        }
+
+        .pricelist h4 {
+            color: var(--dark-grey);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--secondary-blue);
+        }
+
+        .pricelist-items {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .pricelist-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--bg-grey);
+            transition: background-color 0.3s ease;
+        }
+
+        .pricelist-item:last-child {
+            border-bottom: none;
+        }
+
+        .pricelist-item:hover {
+            background-color: rgba(74, 144, 164, 0.05);
+        }
+
+        .service-name {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .service-price {
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        /* Registration Section */
+        .registration-section {
+            background: linear-gradient(135deg, var(--dark-grey) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .registration-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .registration-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .call-now {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary-blue);
+            text-decoration: none;
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--white);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .call-now:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-grey);
+            color: var(--white);
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--secondary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary-blue);
+        }
+
+        .social-icon:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-3px) rotate(5deg);
+            box-shadow: 0 5px 15px rgba(93, 173, 226, 0.4);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .doctors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .doctor-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .clinic-name h1 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-placeholder">
+                        <span data-lang-key="logo"></span>
+                    </div>
+                    <div class="clinic-name">
+                        <h1 data-lang-key="clinic-name"></h1>
+                        <p data-lang-key="clinic-tagline"></p>
+                    </div>
+                </div>
+                <div class="nav-wrapper">
+                    <nav>
+                        <ul>
+                            <li><a href="#home" data-lang-key="nav-home"></a></li>
+                            <li><a href="#doctors" data-lang-key="nav-doctors"></a></li>
+                            <li><a href="#services" data-lang-key="nav-services"></a></li>
+                            <li><a href="#contact" data-lang-key="nav-contact"></a></li>
+                        </ul>
+                    </nav>
+                    <button class="lang-switcher" onclick="toggleLanguage()"></button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h2 data-lang-key="hero-title"></h2>
+            <p data-lang-key="hero-subtitle"></p>
+            <a href="#contact" class="cta-button" data-lang-key="hero-cta"></a>
+        </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section id="doctors" class="doctors-section">
+        <div class="container">
+            <h2 class="section-title" data-lang-key="doctors-title"></h2>
+            <div class="doctors-grid">
+                <!-- Doctor 1 -->
+                <div class="doctor-card">
+                    <div class="doctor-header">
+                        <div class="doctor-image-placeholder">
+                            <span data-lang-key="doctor-photo"></span>
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Dr. [Imię Nazwisko]</h3>
+                            <p class="specialization"><span data-lang-key="specialization"></span> [np. Medycyna Wewnętrzna]</p>
+                            <div class="contact-info">
+                                <p class="phone-icon"><strong data-lang-key="phone"></strong> <a href="tel:+1234567890" style="color: var(--primary-blue); text-decoration: none;">+1 (234) 567-890</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bio">
+                        <h4 data-lang-key="about"></h4>
+                        <p data-lang-key="bio-placeholder"></p>
+                    </div>
+                    <div class="pricelist" id="services">
+                        <h4 data-lang-key="services-pricing"></h4>
+                        <div class="pricelist-items">
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-initial"></span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-followup"></span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-diagnostic"></span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-treatment"></span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-additional"></span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="doctor-card">
+                    <div class="doctor-header">
+                        <div class="doctor-image-placeholder">
+                            <span data-lang-key="doctor-photo2">Zdjęcie<br>Lekarza 2</span>
+                        </div>
+                        <div class="doctor-info">
+                            <h3>Dr. [Imię Nazwisko]</h3>
+                            <p class="specialization"><span data-lang-key="specialization">Specjalizacja:</span> [np. Kardiologia]</p>
+                            <div class="contact-info">
+                                <p class="phone-icon"><strong data-lang-key="phone">Telefon:</strong> <a href="tel:+1234567891" style="color: var(--primary-blue); text-decoration: none;">+1 (234) 567-891</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bio">
+                        <h4 data-lang-key="about">O Lekarzu</h4>
+                        <p data-lang-key="bio-placeholder">
+                            [Biografia lekarza zostanie umieszczona tutaj. Uwzględnij wykształcenie, doświadczenie, obszary specjalizacji,
+                            certyfikaty i podejście do opieki nad pacjentem. Ta sekcja pomaga pacjentom lepiej poznać
+                            swojego lekarza.]
+                        </p>
+                    </div>
+                    <div class="pricelist">
+                        <h4 data-lang-key="services-pricing">Usługi i Cennik</h4>
+                        <div class="pricelist-items">
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-initial">Konsultacja Wstępna</span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-followup">Wizyta Kontrolna</span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-specialized">Procedura Specjalistyczna</span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-screening">Badanie Profilaktyczne</span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                            <div class="pricelist-item">
+                                <span class="service-name" data-lang-key="service-additional">[Dodatkowa Usługa]</span>
+                                <span class="service-price">XXX zł</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="contact" class="registration-section">
+        <div class="container">
+            <h2 data-lang-key="contact-title">Gotowy/a na Umówienie Wizyty?</h2>
+            <p data-lang-key="contact-subtitle">Rejestracja na wizyty dostępna jest poprzez bezpośredni kontakt telefoniczny z naszymi lekarzami.</p>
+            <p style="margin-bottom: 2rem;" data-lang-key="contact-instruction">Wybierz preferowanego specjalistę i zadzwoń!</p>
+            <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                <a href="tel:+1234567890" class="call-now"><span data-lang-key="call-doctor">📞 Zadzwoń do Dr. [Nazwisko]</span></a>
+                <a href="tel:+1234567891" class="call-now"><span data-lang-key="call-doctor2">📞 Zadzwoń do Dr. [Nazwisko]</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-lang-key="footer-about-title">O Naszej Klinice</h3>
+                    <p data-lang-key="footer-about-text">Jesteśmy oddani zapewnianiu najwyższej jakości opieki medycznej z osobistym podejściem. Nasi doświadczeni specjaliści są tutaj, aby pomóc Ci osiągnąć optymalne zdrowie.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="footer-contact-title">Informacje Kontaktowe</h3>
+                    <p>📍 <span data-lang-key="footer-address">[Adres Kliniki]</span></p>
+                    <p>📧 <span data-lang-key="footer-email">[Adres Email]</span></p>
+                    <p>🕐 <span data-lang-key="footer-hours">[Godziny Otwarcia]</span></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-lang-key="footer-social-title">Obserwuj Nas</h3>
+                    <p data-lang-key="footer-social-text">Bądź z nami w kontakcie w mediach społecznościowych</p>
+                    <div class="social-media">
+                        <a href="#" class="social-icon" title="Facebook" aria-label="Facebook">
+                            <span style="font-size: 1.3rem;">f</span>
+                        </a>
+                        <a href="#" class="social-icon" title="Instagram" aria-label="Instagram">
+                            <span style="font-size: 1.3rem;">📷</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-lang-key="footer-copyright">&copy; 2026 Klinika Medyczna. Wszelkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links with header offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.doctor-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Language switching functionality
+        let currentLanguage = 'pl'; // Default language is Polish
+
+        const translations = {
+            pl: {
+                'logo': 'LOGO<br>KLINIKI',
+                'clinic-name': 'Klinika Medyczna',
+                'clinic-tagline': 'Profesjonalne Usługi Zdrowotne',
+                'nav-home': 'Strona Główna',
+                'nav-doctors': 'Nasi Lekarze',
+                'nav-services': 'Usługi',
+                'nav-contact': 'Kontakt',
+                'hero-title': 'Witamy w Naszej Klinice Medycznej',
+                'hero-subtitle': 'Zapewniamy wyjątkową opiekę zdrowotną z troską i fachowością. Twoje zdrowie jest naszym priorytetem.',
+                'hero-cta': 'Umów Wizytę',
+                'doctors-title': 'Poznaj Naszych Specjalistów',
+                'doctor-photo': 'Zdjęcie<br>Lekarza 1',
+                'doctor-photo2': 'Zdjęcie<br>Lekarza 2',
+                'specialization': 'Specjalizacja:',
+                'phone': 'Telefon:',
+                'about': 'O Lekarzu',
+                'bio-placeholder': '[Biografia lekarza zostanie umieszczona tutaj. Uwzględnij wykształcenie, doświadczenie, obszary specjalizacji, certyfikaty i podejście do opieki nad pacjentem. Ta sekcja pomaga pacjentom lepiej poznać swojego lekarza.]',
+                'services-pricing': 'Usługi i Cennik',
+                'service-initial': 'Konsultacja Wstępna',
+                'service-followup': 'Wizyta Kontrolna',
+                'service-diagnostic': 'Badanie Diagnostyczne',
+                'service-treatment': 'Opracowanie Planu Leczenia',
+                'service-specialized': 'Procedura Specjalistyczna',
+                'service-screening': 'Badanie Profilaktyczne',
+                'service-additional': '[Dodatkowa Usługa]',
+                'contact-title': 'Gotowy/a na Umówienie Wizyty?',
+                'contact-subtitle': 'Rejestracja na wizyty dostępna jest poprzez bezpośredni kontakt telefoniczny z naszymi lekarzami.',
+                'contact-instruction': 'Wybierz preferowanego specjalistę i zadzwoń!',
+                'call-doctor': '📞 Zadzwoń do Dr. [Nazwisko]',
+                'call-doctor2': '📞 Zadzwoń do Dr. [Nazwisko]',
+                'footer-about-title': 'O Naszej Klinice',
+                'footer-about-text': 'Jesteśmy oddani zapewnianiu najwyższej jakości opieki medycznej z osobistym podejściem. Nasi doświadczeni specjaliści są tutaj, aby pomóc Ci osiągnąć optymalne zdrowie.',
+                'footer-contact-title': 'Informacje Kontaktowe',
+                'footer-address': '[Adres Kliniki]',
+                'footer-email': '[Adres Email]',
+                'footer-hours': '[Godziny Otwarcia]',
+                'footer-social-title': 'Obserwuj Nas',
+                'footer-social-text': 'Bądź z nami w kontakcie w mediach społecznościowych',
+                'footer-copyright': '© 2026 Klinika Medyczna. Wszelkie prawa zastrzeżone.'
+            },
+            en: {
+                'logo': 'CLINIC<br>LOGO',
+                'clinic-name': 'Medical Clinic',
+                'clinic-tagline': 'Professional Healthcare Services',
+                'nav-home': 'Home',
+                'nav-doctors': 'Our Doctors',
+                'nav-services': 'Services',
+                'nav-contact': 'Contact',
+                'hero-title': 'Welcome to Our Medical Clinic',
+                'hero-subtitle': 'Providing exceptional healthcare with compassion and expertise. Your health is our priority.',
+                'hero-cta': 'Schedule an Appointment',
+                'doctors-title': 'Meet Our Specialists',
+                'doctor-photo': 'Doctor<br>Photo 1',
+                'doctor-photo2': 'Doctor<br>Photo 2',
+                'specialization': 'Specialization:',
+                'phone': 'Phone:',
+                'about': 'About',
+                'bio-placeholder': "[Doctor's biography will be placed here. Include education, experience, areas of expertise, certifications, and approach to patient care. This section helps patients get to know their healthcare provider better.]",
+                'services-pricing': 'Services & Pricing',
+                'service-initial': 'Initial Consultation',
+                'service-followup': 'Follow-up Visit',
+                'service-diagnostic': 'Diagnostic Examination',
+                'service-treatment': 'Treatment Plan Development',
+                'service-specialized': 'Specialized Procedure',
+                'service-screening': 'Preventive Screening',
+                'service-additional': '[Additional Service]',
+                'contact-title': 'Ready to Schedule Your Appointment?',
+                'contact-subtitle': 'Registration for visits is available by calling our doctors directly.',
+                'contact-instruction': 'Choose your preferred specialist and give them a call!',
+                'call-doctor': '📞 Call Dr. [Name]',
+                'call-doctor2': '📞 Call Dr. [Name]',
+                'footer-about-title': 'About Our Clinic',
+                'footer-about-text': 'We are dedicated to providing the highest quality medical care with a personal touch. Our experienced specialists are here to help you achieve optimal health.',
+                'footer-contact-title': 'Contact Information',
+                'footer-address': '[Clinic Address]',
+                'footer-email': '[Email Address]',
+                'footer-hours': '[Working Hours]',
+                'footer-social-title': 'Follow Us',
+                'footer-social-text': 'Stay connected with us on social media',
+                'footer-copyright': '© 2026 Medical Clinic. All rights reserved.'
+            }
+        };
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'pl' ? 'en' : 'pl';
+            updatePageLanguage();
+        }
+
+        function updatePageLanguage() {
+            const langButton = document.querySelector('.lang-switcher');
+            // Update button to show the OTHER language (the one you can switch TO)
+            if (currentLanguage === 'pl') {
+                langButton.innerHTML = '<span class="flag-icon">🇬🇧</span><span>EN</span>';
+            } else {
+                langButton.innerHTML = '<span class="flag-icon">🇵🇱</span><span>PL</span>';
+            }
+
+            // Update HTML lang attribute
+            document.documentElement.lang = currentLanguage;
+
+            // Update page title
+            document.title = currentLanguage === 'pl'
+                ? 'Klinika Medyczna - Profesjonalne Usługi Zdrowotne'
+                : 'Medical Clinic - Professional Healthcare Services';
+
+            // Update all elements with data-lang-key attribute
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                const key = element.getAttribute('data-lang-key');
+                if (translations[currentLanguage][key]) {
+                    element.innerHTML = translations[currentLanguage][key];
+                }
+            });
+        }
+
+        // Initialize language on page load
+        updatePageLanguage();
+    </script>
+</body>
+</html>
+
